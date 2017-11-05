@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseNotFound
 from django.shortcuts import render
 
 
@@ -24,7 +24,26 @@ def hello(request):
 
 
 def python_(request):
+    print(request.COOKIES)
+    print(request.method)
+    print(request.GET)
+    print(request.POST)
+
     return render(request, 'python.html')
+
+
+def http(request):
+    print(request.COOKIES)
+    print(request.method)
+    print(request.GET)
+    print(request.POST)
+
+    response = render(request, 'http.html')
+    print(dir(response))
+    response['Age'] = 2000
+    response.status_code = 404
+    print('content', response['Content-Type'])
+    return HttpResponseNotFound('404')
 
 
 def sum_num(request, a, b):
@@ -37,4 +56,5 @@ urlpatterns = [
     url(r'^$', hello),
     url(r'^python/$', python_),
     url(r'^admin/', admin.site.urls),
+    url(r'^http/$', http),
 ]
