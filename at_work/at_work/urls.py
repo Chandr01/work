@@ -16,18 +16,25 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 from django.http import HttpResponse
+from django.shortcuts import render
 
 
 def hello(request):
-    return HttpResponse('Hello world!!! ')
+    return render(request, 'index.html')
 
 
 def python_(request):
-    return HttpResponse('Hello PYTHON!!! ')
+    return render(request, 'python.html')
+
+
+def sum_num(request, a, b):
+    c = int(a) + int(b)
+    return HttpResponse('sum = ' + str(c))
 
 
 urlpatterns = [
-    url(r'^hello/$', hello),
+    url(r'^sum/(?P<a>\d+)&(?P<b>\d+)$', sum_num),
+    url(r'^$', hello),
     url(r'^python/$', python_),
     url(r'^admin/', admin.site.urls),
 ]
