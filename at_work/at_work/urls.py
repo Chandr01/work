@@ -15,43 +15,11 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-from django.http import HttpResponse, HttpResponseNotFound
-from django.shortcuts import render
-
-
-def hello(request):
-    return render(request, 'index.html')
-
-
-def python_(request):
-    print(request.COOKIES)
-    print(request.method)
-    print(request.GET)
-    print(request.POST)
-
-    return render(request, 'python.html')
-
-
-def http(request):
-    print(request.COOKIES)
-    print(request.method)
-    print(request.GET)
-    print(request.POST)
-
-    response = render(request, 'http.html')
-    print(dir(response))
-    response['Age'] = 2000
-    response.status_code = 404
-    print('content', response['Content-Type'])
-    return HttpResponseNotFound('404')
-
-
-def sum_num(request, a, b):
-    c = int(a) + int(b)
-    return HttpResponse('sum = ' + str(c))
+from instructors.views import hello, python_, sum_num, http, instructors_list
 
 
 urlpatterns = [
+    url(r'^instructors/$', instructors_list),
     url(r'^sum/(?P<a>\d+)&(?P<b>\d+)$', sum_num),
     url(r'^$', hello),
     url(r'^python/$', python_),
