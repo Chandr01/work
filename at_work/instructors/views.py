@@ -1,5 +1,4 @@
 
-
 # Create your views here.
 from django.http import HttpResponse, HttpResponseNotFound
 from django.shortcuts import render
@@ -8,7 +7,6 @@ from instructors.models import Instructors
 
 def instructors_list(request):
     instructors = Instructors.objects.all()
-
     return render(request, 'instructors.html', {'instructors_list': instructors})
 
 
