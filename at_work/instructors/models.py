@@ -30,7 +30,7 @@ class Instructors(models.Model):
     gender = models.CharField(max_length=1, choices=(('m', 'Male'), ('f', 'Female')), default='m')
     position = models.ForeignKey(Position, null=True)
     # position = models.CharField(choices=(('i', 'Instructor'), ('a', 'Assistent')), max_length=1)
-    user = models.OneToOneField(settings.AUTH_USER_MODEL, null=True)
+    # user = models.OneToOneField(settings.AUTH_USER_MODEL, null=True)
 
     def __str__(self):
         return self.name
