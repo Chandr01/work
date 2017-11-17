@@ -11,7 +11,8 @@ def instructors_list(request):
 
 
 def hello(request):
-    return render(request, 'index.html')
+
+    return render(request, 'index.html', {'var1': 'Hello python'})
 
 
 def python_(request):
