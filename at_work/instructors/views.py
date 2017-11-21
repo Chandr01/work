@@ -11,8 +11,12 @@ def instructors_list(request):
 
 
 def hello(request):
-
-    return render(request, 'index.html', {'var1': 'Hello python'})
+    context = {'var1': 'Hello python'}
+    context['var2'] = {'some_str''Hello Chan'}
+    context['var3'] = ['a', 'b', 'c']
+    instructors = Instructors.objects.all()
+    context['all_instructors'] = instructors
+    return render(request, 'index.html', context)
 
 
 def python_(request):
